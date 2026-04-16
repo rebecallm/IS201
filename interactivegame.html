@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dance Move Guessing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #f7d9c4, #fbeee6);
+      color: #4a2c2a;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #b85c38;
+    }
+
+    .clue-box {
+      font-size: 1.5rem;
+      margin: 25px 0;
+      padding: 20px;
+      background-color: #fff3ed;
+      border-radius: 15px;
+    }
+
+    input {
+      padding: 12px;
+      width: 70%;
+      border: 2px solid #d9a58b;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #c4633d;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #a94f2d;
+    }
+
+    #feedback {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .score {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 25px;
+      text-decoration: none;
+      color: white;
+      background-color: #c4633d;
+      padding: 10px 18px;
+      border-radius: 10px;
+    }
+
+    .back-link:hover {
+      background-color: #a94f2d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dance Move Guessing Game 💃</h1>
+    <p>Read the clue and guess the dance move!</p>
+
+    <div class="clue-box" id="clue">Loading clue...</div>
+
+    <input type="text" id="guessInput" placeholder="Type your guess here">
+    <br>
+    <button onclick="checkGuess()">Submit Guess</button>
+    <button onclick="nextQuestion()">Next</button>
+
+    <div id="feedback"></div>
+    <div class="score">Score: <span id="score">0</span></div>
+
+    <a href="scratch.html" class="back-link">Back to Interests Page</a>
+  </div>
+
+  <script>
+    const danceMoves = [
+      {
+        clue: "A fast turn on one foot",
+        answer: "spin"
+      },
+      {
+        clue: "A movement where you clap your hands with the beat",
+        answer: "clap"
+      },
+      {
+        clue: "A smooth sideways movement across the floor",
+        answer: "slide"
+      },
+      {
+        clue: "A jump with energy and rhythm",
+        answer: "jump"
+      },
+      {
+        clue: "A sharp movement popping the body to the beat",
+        answer: "pop"
+      },
+      {
+        clue: "A twisting movement with your hips",
+        answer: "twist"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      document.getElementById("clue").textContent = danceMoves[currentQuestion].clue;
+      document.getElementById("guessInput").value = "";
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function checkGuess() {
+      const userGuess = document.getElementById("guessInput").value.trim().toLowerCase();
+      const correctAnswer = danceMoves[currentQuestion].answer;
+
+      if (userGuess === correctAnswer) {
+        document.getElementById("feedback").textContent = "Correct! 🎉";
+        score++;
+        document.getElementById("score").textContent = score;
+      } else {
+        document.getElementById("feedback").textContent = "Not quite. The correct answer was: " + correctAnswer;
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion >= danceMoves.length) {
+        document.getElementById("clue").textContent = "Game Over! Final Score: " + score + " / " + danceMoves.length;
+        document.getElementById("feedback").textContent = "Great job playing!";
+        document.getElementById("guessInput").style.display = "none";
+      } else {
+        loadQuestion();
+      }
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
