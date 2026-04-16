@@ -23,6 +23,10 @@ body {
     background-color: #c4633d;
     color: white;
     text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
 .nav a {
     color: white;
@@ -31,6 +35,7 @@ body {
     background-color: #c4633d;
     text-align: left;
 }
+
 
 .nav a:hover {
     text-decoration: underline;
@@ -135,6 +140,7 @@ iframe {
     padding: 25px;
     border-radius: 16px 16px 0 0;
     margin-bottom: 0;
+    position: relative;
 }
 
 .footer a {
